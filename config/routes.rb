@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   get "users_posts", to: "users#show"
 
+  get "events_posts/:id", to: "events#show", as: "event_posts"
+
   root to: "events#index"
+
+  resources :events, only: [ :index, :new, :create ]
 
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

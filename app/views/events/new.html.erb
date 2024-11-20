@@ -1,0 +1,39 @@
+<h1>Create Event</h1>
+
+<%= form_with model: @event do |form| %>
+
+    <% if form.object.errors.any? %>
+        <div class="alert alert-danger">
+            <%= form.object.errors.full_messages.join(". ") %>
+        </div>
+    <% end %>
+
+    <div class="mb-2">
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </div>
+
+    <div class="mb-2">
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </div>
+
+    <div class="mb-2">
+        <%= form.label :location %>
+        <%= form.text_field :location %>
+    </div>
+
+    <div class="mb-2">
+        <%= form.label :date %>
+        <%= form.datetime_field :date %>
+    </div>
+
+    <div class="mb-2">
+        <%= form.submit "Create Event", class: "btn btn-primary" %>
+    </div>
+<% end %>
+
+<div>
+    <%= button_to "Back to Events", events_path, method: :get, class: "btn btn-secondary" %>
+</div>
+
