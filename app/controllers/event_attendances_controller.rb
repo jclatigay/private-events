@@ -11,9 +11,9 @@ class EventAttendancesController < ApplicationController
     end
   end
 
-  private
-
-  def event_attendance_params
-    params.require(:event_attendance).permit(:event_id)
+  def destroy
+    @event_attendance = EventAttendance.find(params[:id])
+    @event_attendance.destroy
+    redirect_back(fallback_location: root_path, notice: "You are no longer attending this event.")
   end
 end

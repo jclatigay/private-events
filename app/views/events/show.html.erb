@@ -17,11 +17,15 @@
     <% if current_user %>
         <% if @event.attendees.include?(current_user) %>
             <p>You are attending this event</p>
+            <%= button_to "Cancel Attendance", 
+                          event_attendance_path(current_user.event_attendances.find_by(event_id: @event.id)), 
+                          method: :delete,
+                          class: "btn btn-danger" %>
         <% else %>
             <%= button_to "Attend Event", 
                           event_attendances_path, 
-                      params: { event_id: @event.id },
-                      method: :post, 
+                          params: { event_id: @event.id },
+                          method: :post, 
                           class: "btn btn-primary" %>
         <% end %>
         <ul>
