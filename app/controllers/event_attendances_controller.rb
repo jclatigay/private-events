@@ -5,9 +5,9 @@ class EventAttendancesController < ApplicationController
     @event_attendance = current_user.event_attendances.build(event_id: params[:event_id])
 
     if @event_attendance.save
-      redirect_to root_path, notice: "You are now attending this event."
+      redirect_back(fallback_location: root_path, notice: "You are now attending this event.")
     else
-      redirect_to root_path, alert: "Failed to attend event"
+      redirect_back(fallback_location: root_path, alert: "Failed to attend event")
     end
   end
 
