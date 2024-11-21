@@ -15,9 +15,8 @@
 <div class="container border border-dark rounded-3 p-3">
     <% if current_user.attended_events.any? %>
         <h3>Upcoming Events</h3>
-        <% upcoming_events = current_user.attended_events.where("date > ?", Date.today) %>
-        <% if upcoming_events.any? %>
-            <% upcoming_events.each do |event| %>
+        <% if current_user.attended_events.upcoming.any? %>
+            <% current_user.attended_events.upcoming.each do |event| %>
                 <p><%= link_to event.title, event_posts_path(event) %></p>
                 <p><%= event.date %></p>
                 <p><%= event.location %></p>
@@ -27,9 +26,8 @@
         <% end %>
 
         <h3>Past Events</h3>
-        <% past_events = current_user.attended_events.where("date < ?", Date.today) %>
-        <% if past_events.any? %>
-            <% past_events.each do |event| %>
+        <% if current_user.attended_events.past.any? %>
+            <% current_user.attended_events.past.each do |event| %>
                 <p><%= link_to event.title, event_posts_path(event) %></p>
                 <p><%= event.date %></p>
                 <p><%= event.location %></p>
@@ -40,4 +38,8 @@
     <% else %>
         <p>You have not attended any events</p>
     <% end %>
+</div>
+
+<div class="mt-3 mb-3">
+    <%= button_to "Back to Events", events_path, method: :get, class: "btn btn-secondary" %>
 </div>
